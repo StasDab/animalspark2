@@ -10,9 +10,9 @@ use App\Http\Controllers\AuthController;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| 
+| 
+| 
 |
 */
 
@@ -23,9 +23,7 @@ Route::get('/', function () {
 
 // Публичные маршруты (доступны всем)
 Route::get('/cages', [CageController::class, 'index'])->name('cages.index');
-Route::get('/cages/{cage}', [CageController::class, 'show'])->name('cages.show');
 Route::get('/animals', [AnimalController::class, 'index'])->name('animals.index');
-Route::get('/animals/{animal}', [AnimalController::class, 'show'])->name('animals.show');
 
 // Защищенные маршруты для авторизованных пользователей
 Route::middleware('auth')->group(function () {
@@ -43,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/animals/{animal}', [AnimalController::class, 'update'])->name('animals.update');
     Route::delete('/animals/{animal}', [AnimalController::class, 'destroy'])->name('animals.destroy');
 });
+
+// Публичные маршруты с параметрами (должны быть ПОСЛЕ /create и /edit)
+Route::get('/cages/{cage}', [CageController::class, 'show'])->name('cages.show');
+Route::get('/animals/{animal}', [AnimalController::class, 'show'])->name('animals.show');
 
 // Маршруты авторизации
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
