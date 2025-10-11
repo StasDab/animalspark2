@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/animals/{animal}', [AnimalController::class, 'destroy'])->name('animals.destroy');
 });
 
-// Публичные маршруты с параметрами (должны быть ПОСЛЕ /create и /edit)
+// Публичные маршруты с параметрами
 Route::get('/cages/{cage}', [CageController::class, 'show'])->name('cages.show');
 Route::get('/animals/{animal}', [AnimalController::class, 'show'])->name('animals.show');
 
